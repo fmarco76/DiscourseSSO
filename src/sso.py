@@ -18,13 +18,12 @@ SSO Application tests
 """
 
 
-from flask import abort
-from flask import Flask
-from flask import request
+from flask import abort, Flask, redirect, request, url_for, session
+
 import base64
 import hashlib
 import hmac
-import urllib
+
 
 app = Flask(__name__)
 app.config.from_object('default.Config')
@@ -44,16 +43,21 @@ def payload_check():
     if not payload or not signature:
         abort(400)
 
+    app.logger.debug('Session Secret Key: %s',
+                     app.secret_key)
+    app.logger.debug('SSO Secret Key: %s',
+                     app.config.get('DISCUOURSE_SECRET_KEY'))
     dig = hmac.new(
-        app.config.get('SECRET_KEY'),
+        app.config.get('DISCUOURSE_SECRET_KEY'),
         payload,
         hashlib.sha256
     ).hexdigest()
     app.logger.debug('Calculated hash: ' + dig)
     if dig != signature:
         abort(400)
-    
-    return 'Hello World!'
+    decoded_msg = base64.decodestring(payload)
+    session['nonce'] = decoded_msg
+    return redirect(url_for('user_authz'))
 
 
 @app.route('/sso/auth')
