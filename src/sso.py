@@ -23,7 +23,7 @@ from flask import abort, Flask, redirect, request, url_for, session
 import base64
 import hashlib
 import hmac
-
+import urllib
 
 app = Flask(__name__)
 app.config.from_object('default.Config')
@@ -46,9 +46,9 @@ def payload_check():
     app.logger.debug('Session Secret Key: %s',
                      app.secret_key)
     app.logger.debug('SSO Secret Key: %s',
-                     app.config.get('DISCUOURSE_SECRET_KEY'))
+                     app.config.get('DISCOURSE_SECRET_KEY'))
     dig = hmac.new(
-        app.config.get('DISCUOURSE_SECRET_KEY'),
+        app.config.get('DISCOURSE_SECRET_KEY'),
         payload,
         hashlib.sha256
     ).hexdigest()
@@ -62,7 +62,37 @@ def payload_check():
 
 @app.route('/sso/auth')
 def user_authz():
-    return 'Hello World!'
+    attribute_map = app.config.get('DISCOURSE_USER_MAP')
+    name_list = []
+    for name_to_map in attribute_map['name']:
+        name_list.append(request.environ.get(name_to_map))
+    name = ' '.join(name_list)
+    username = request.environ.get(attribute_map['username'])
+    email = request.environ.get(attribute_map['email'])
+    external_id = request.environ.get(attribute_map['external_id'])
+
+    query = (session['nonce'] +
+             '&name=' + name +
+             '&username=' + username +
+             '&email=' + email +
+             '&external_id=' + external_id)
+    app.logger.debug('Query string to return: ' + query)
+    query_b64 = base64.encodestring(query)
+    app.logger.debug('Base64 query string to return: ' + query_b64)
+    query_urlenc = urllib.quote(query_b64)
+    app.logger.debug('URLEnc query string to return: ' + query_b64)
+    sig = hmac.new(
+        app.config.get('DISCOURSE_SECRET_KEY'),
+        query_urlenc,
+        hashlib.sha256
+    ).hexdigest()
+
+    redirect_url = (app.config.get('DISCOURSE_URL') +
+                    '/session/sso_login?'
+                    'sso=' + query_urlenc +
+                    '&sig=' + sig)
+
+    return redirect(redirect_url)
 
 
 if __name__ == '__main__':

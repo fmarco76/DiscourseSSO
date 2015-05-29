@@ -18,7 +18,7 @@ SSO Application tests
 """
 
 
-from flask import Flask, url_for
+from flask import url_for
 import pytest
 from urlparse import urlparse
 from werkzeug.exceptions import BadRequest
@@ -26,10 +26,13 @@ import sso
 
 app = sso.app
 
+
 class Test_sso():
 
-
     def test_payload_check(self):
+        """Test the payload is properly managed and the user is sent to the
+        authentication page
+        """
         with app.test_client() as c:
             res = c.get('/sso/login?sso=bm9uY2U9Y2I2ODI1MWVlZm'
                         'I1MjExZTU4YzAwZmYxMzk1ZjBjMGI%3D%0A&'
@@ -39,6 +42,9 @@ class Test_sso():
             assert urlparse(res.location).path == url_for('user_authz')
 
     def test_bad_payload_sig(self):
+        """Test the error code 400 is sent if the signature do not match
+        the payload
+        """
         with app.test_request_context('/sso/login?sso=bm9uY2U9Y2I2ODI1MWVlZm'
                                       'I1MjExZTU4YzAwZmYxMzk1ZjBjMGI%3D%0A&'
                                       'sig=2828aa29899722b35a2f191d34ef9b3ce'
@@ -63,3 +69,11 @@ class Test_sso():
                                       method='GET'):
             with pytest.raises(BadRequest):
                 sso.payload_check()
+
+    def test_authentication_generation(self):
+        """Test the authentication are properly send to Discourse"""
+        with app.test_request_context('/sso/login?sso=bm9uY2U9Y2I2ODI1MWVlZm'
+                                      'I1MjExZTU4YzAwZmYxMzk1ZjBjMGI%3D%0A&',
+                                      method='GET'):
+            with pytest.raises(BadRequest):
+                sso.user_authz()
