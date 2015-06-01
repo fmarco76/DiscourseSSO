@@ -1,6 +1,9 @@
 =========================
 Discourse SSO application
 =========================
+
+| |travis| |appveyor| |coveralls| |landscape| |scrutinizer|
+
 .. |travis| image:: http://img.shields.io/travis/fmarco76/DiscourseSSO/master.png?style=flat
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/fmarco76/DiscourseSSO
