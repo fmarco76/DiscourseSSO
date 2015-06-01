@@ -2,15 +2,11 @@
 Discourse SSO application
 =========================
 
-| |travis| |appveyor| |coveralls| |landscape| |scrutinizer|
+| |travis| |coveralls| |landscape| |scrutinizer|
 
 .. |travis| image:: http://img.shields.io/travis/fmarco76/DiscourseSSO/master.png?style=flat
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/fmarco76/DiscourseSSO
-
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/fmarco76/DiscourseSSO?branch=master
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/fmarco76/DiscourseSSO
 
 .. |coveralls| image:: https://coveralls.io/repos/fmarco76/DiscourseSSO/badge.svg?style=flat
     :alt: Coverage Status
