@@ -105,6 +105,13 @@ class Test_sso():
             req.session['nonce'] = 'nonce=cb68251eefb5211e58c00ff1395f0c0b'
             resp = sso.user_authz()
             assert resp.status_code == 302
+            # sso and sig are different from the one reported in
+            # https://meta.discourse.org/t/official-single-sign-on-for-
+            #        discourse/13045
+            # This because ruby and python include new lines in different
+            # positions during the base64 encoding (of course they do not
+            # matter for the base64 but the following URLencoding and
+            # signature are slightly different)
             assert resp.location == ('http://discuss.example.com/session/'
                                      'sso_login?sso=bm9uY2U9Y2I2ODI1MWVlZ'
                                      'mI1MjExZTU4YzAwZmYxMzk1ZjBjMGImbmFt'
