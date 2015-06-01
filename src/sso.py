@@ -61,25 +61,23 @@ def payload_check():
 @app.route('/sso/auth')
 def user_authz():
     attribute_map = app.config.get('DISCOURSE_USER_MAP')
+    email = request.environ.get(attribute_map['email'])
+    external_id = request.environ.get(attribute_map['external_id'])
+    if not (email and external_id):
+        abort(403)
     name_list = []
     for name_to_map in attribute_map['name']:
         if request.environ.get(name_to_map):
             name_list.append(request.environ.get(name_to_map))
-    if name_list:
-        name = ' '.join(name_list)
-    email = request.environ.get(attribute_map['email'])
+    name = ' '.join(name_list)
     if request.environ.get(attribute_map['username']):
         username = request.environ.get(attribute_map['username'])
     else:
-        if name_list and email:
-            username = (name.replace(' ', '') +
-                        "_" +
-                        hashlib.md5(email).hexdigest()[0:4]
-                        )
-    external_id = request.environ.get(attribute_map['external_id'])
+        username = (name.replace(' ', '') +
+                    "_" +
+                    hashlib.md5(email).hexdigest()[0:4]
+                    )
 
-    if not (name_list and email and username and external_id):
-        abort(403)
     app.logger.debug('Authenticating "%s" with username "%s" and email "%s"',
                      name, username, email)
     if 'nonce' not in session:
