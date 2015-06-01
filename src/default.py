@@ -6,7 +6,7 @@ class Config(object):
     DISCOURSE_SECRET_KEY = 'd836444a9e4084d5b224a60c208dce14'
     DISCOURSE_USER_MAP = {
         'name': ['givenName', 'sn'],
-        'username': '',
+        'username': 'username',
         'external_id': 'eppn',
         'email': 'mail'
     }
