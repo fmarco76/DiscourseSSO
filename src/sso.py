@@ -80,8 +80,9 @@ def user_authz():
 
     if not (name_list and email and username and external_id):
         abort(403)
-    app.logger.debug('Authenticating "%s" with username "%s" and email "%s"',
-                     name, username, email)
+    app.logger.debug('Authenticating "%s"', name)
+    app.logger.debug('username "%s"', username)
+    app.logger.debug('email "%s"', email)
     if 'nonce' not in session:
         abort(403)
     query = (session['nonce'] +
