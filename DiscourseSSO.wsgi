@@ -15,8 +15,9 @@
 
 """
 WSGI script to run the application.
-Configure the environment variable DISCOURSE_SSO_CONFIG in order to read the
-configuration file with the variables:
+Customise the file config.py or provide your own file using the environment
+variable DISCOURSE_SSO_CONFIG in order to read the configuration for the
+following variables:
     - DISCOURSE_URL: Discourse URL to send the user back
     - DISCOURSE_SECRET_KEY: Secret key shared with the Discourse server
     - DISCOURSE_USER_MAP: Attribute to read from the environment after user
