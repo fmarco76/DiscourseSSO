@@ -16,6 +16,7 @@ include README.rst
 
 include requirements.txt
 include tox.ini .travis.yml .scrutinizer.yml
+include DiscourseSSO.wsgi
 
 include DiscourseSSO.py
 
