@@ -17,6 +17,7 @@
 Default configuration for FLASK app
 """
 
+
 class Config(object):
     DEBUG = False
     TESTING = False
