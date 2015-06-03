@@ -14,7 +14,9 @@
 #    under the License.
 
 """
-SSO Application tests
+SSO FLASK Application for Discourse
+The configuration file is defined with the variable "DISCOURSE_SSO_CONFIG",
+for the most significant values look at the sso/default.py file
 """
 
 
@@ -32,7 +34,11 @@ app.config.from_envvar('DISCOURSE_SSO_CONFIG', True)
 
 @app.route('/sso/login')
 def payload_check():
-
+    """
+    Verify the payload and signature coming from a Discourse server and if
+    correct redirect to the authentication page
+    :return: The redirection page to the authentication page
+    """
     payload = request.args.get('sso', '')
     signature = request.args.get('sig', '')
 
@@ -60,6 +66,12 @@ def payload_check():
 
 @app.route('/sso/auth')
 def user_authz():
+    """
+    Read the user attributes provided by the application server (generally
+    it is apache httpd) as environment variables and create the payload to
+    send to discourse
+    :return: The redirection page to Discourse
+    """
     attribute_map = app.config.get('DISCOURSE_USER_MAP')
     email = request.environ.get(attribute_map['email'])
     external_id = request.environ.get(attribute_map['external_id'])
@@ -104,7 +116,3 @@ def user_authz():
                     '&sig=' + sig)
 
     return redirect(redirect_url)
-
-
-if __name__ == '__main__':
-    app.run()

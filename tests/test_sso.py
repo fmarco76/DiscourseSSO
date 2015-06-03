@@ -33,11 +33,12 @@ class Test_sso():
         """Test the payload is properly managed and the user is sent to the
         authentication page
         """
-        with app.test_client() as c:
-            res = c.get('/sso/login?sso=bm9uY2U9Y2I2ODI1MWVlZm'
-                        'I1MjExZTU4YzAwZmYxMzk1ZjBjMGI%3D%0A&'
-                        'sig=2828aa29899722b35a2f191d34ef9b3ce'
-                        '695e0e6eeec47deb46d588d70c7cb56')
+        with app.test_request_context('/sso/login?sso=bm9uY2U9Y2I2ODI1MWVlZm'
+                                      'I1MjExZTU4YzAwZmYxMzk1ZjBjMGI%3D%0A&'
+                                      'sig=2828aa29899722b35a2f191d34ef9b3ce'
+                                      '695e0e6eeec47deb46d588d70c7cb56',
+                                      method='GET'):
+            res = sso.payload_check()
             assert res.status_code == 302
             assert urlparse(res.location).path == url_for('user_authz')
 

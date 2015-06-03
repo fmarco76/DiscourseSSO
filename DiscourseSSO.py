@@ -14,21 +14,10 @@
 #    under the License.
 
 """
-Default configuration for FLASK app
+SSO Application tests
 """
 
-class Config(object):
-    DEBUG = False
-    TESTING = False
-    SECRET_KEY = 'vWr,-n7NlGPv9SyIGBMr4ehwThUY92DpWPqIuh2NP_6Of-_8b3,h'
-    # Discourse URL to send the user back
-    DISCOURSE_URL = 'http://discuss.example.com'
-    # Secret key shared with the Discourse server
-    DISCOURSE_SECRET_KEY = 'd836444a9e4084d5b224a60c208dce14'
-    # Attribute to read from the environment after user validation
-    DISCOURSE_USER_MAP = {
-        'name': ['givenName', 'sn'],
-        'username': 'username',
-        'external_id': 'eppn',
-        'email': 'mail'
-    }
+import sso
+
+if __name__ == '__main__':
+    sso.app.run()
