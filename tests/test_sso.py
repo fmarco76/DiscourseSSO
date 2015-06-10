@@ -118,9 +118,9 @@ class Test_sso():
                                      'mI1MjExZTU4YzAwZmYxMzk1ZjBjMGImbmFt'
                                      'ZT1zYW0mdXNlcm5hbWU9%0Ac2Ftc2FtJmVt'
                                      'YWlsPXRlc3QlNDB0ZXN0LmNvbSZleHRlcm5'
-                                     'hbF9pZD1oZWxsbzEyMw%3D%3D%0A&sig=b8'
-                                     '2864ea726a3fced213acf19c62296f79a64'
-                                     'cd7a04921c951dd7d05e2c0165e')
+                                     'hbF9pZD1oZWxsbzEyMw%3D%3D%0A&sig=52'
+                                     '92265340422c9ce2d528e25d2927a2e24b4'
+                                     '81c3e91fa353516ad458d312ffd')
 
     def test_authentication_generation_with_full_name(self):
         """Test the authentication are properly send to Discourse"""
@@ -141,6 +141,6 @@ class Test_sso():
                                      'ZT1zYW0gYmlnJnVzZXJu%0AYW1lPXNhbWJp'
                                      'Z19iNjQyJmVtYWlsPXRlc3QlNDB0ZXN0LmN'
                                      'vbSZleHRlcm5hbF9pZD1oZWxsbzEy%0AMw%'
-                                     '3D%3D%0A&sig=12620fa583a8d03f17eb7b'
-                                     'dd52ef1e2ae25641b14b164e5621aea3762'
-                                     '0e00f06')
+                                     '3D%3D%0A&sig=2371c654bbfbc5b322340a'
+                                     '8fc61de880147ba00cba0fd6d29a751ad12'
+                                     'e87862b')

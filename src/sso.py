@@ -107,7 +107,7 @@ def user_authz():
     app.logger.debug('URLEnc query string to return: %s', query_urlenc)
     sig = hmac.new(
         app.config.get('DISCOURSE_SECRET_KEY'),
-        query_urlenc,
+        query_b64,
         hashlib.sha256
     ).hexdigest()
     app.logger.debug('Signature: %s', sig)
