@@ -73,12 +73,8 @@ from `GitHub <https://github.com/fmarco76/DiscourseSSO>`_ in a directory accessi
 by apache. Configure mod_wsgi to include the source code of the package and add
 the `DiscourseSSO.wsgi` script to the location to use for Discourse. Finally, shibboleth
 has to protect the authentication directory so the user has to go to the IdP in order
-be accepted. The configuration should look like:
+be accepted. The configuration should look like:::
 
-::
-    .
-    .
-    .
     WSGIDaemonProcess discourse threads=5 python-path=<path-to-discourse>/DiscourseSSO/src
     WSGIScriptAlias /DiscourseSSO /var/www/DiscourseSSO/DiscourseSSO.wsgi
     WSGISocketPrefix /var/run/wsgi
@@ -96,8 +92,6 @@ be accepted. The configuration should look like:
         ShibRequestSetting requireSession 1
         require shib-session
     </Location>
-    .
-    .
 
 Finally, both Discourse and DiscourseSSO need to be configured. Enable the sso in
 Discourse following the `official documentation <https://meta.discourse.org/t/official-single-sign-on-for-discourse/13045>`_.
