@@ -75,7 +75,7 @@ the `DiscourseSSO.wsgi` script to the location to use for Discourse. Finally, sh
 has to protect the authentication directory so the user has to go to the IdP in order
 be accepted. The configuration should look like:
 
-.. code-block:: apacheconf
+::
     .
     .
     .
