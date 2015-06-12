@@ -108,26 +108,3 @@ values but the other accept only one value. Default are good for a SAML based
 authentication but for other authentication mechanism you have to modify them accordingly.
 
 After the configuration restart the apache httpd daemon and enable the sso in Discourse.
-
-.. code-block:: d
-   :linenos:
-   :emphasize-lines: 1,2,4
-
-   import std.stdio;
-   import yaml;
-
-   void main()
-   {
-       //Read the input.
-       Node root = Loader("input.yaml").load();
-
-       //Display the data read.
-       foreach(string word; root["Hello World"])
-       {
-           writeln(word);
-       }
-       writeln("The answer is ", root["Answer"].as!int);
-
-       //Dump the loaded document to output.yaml.
-       Dumper("output.yaml").dump(root);
-   }
