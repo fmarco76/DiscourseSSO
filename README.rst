@@ -2,7 +2,7 @@
 Discourse SSO application
 =========================
 
-| |travis| |coveralls| |landscape| |scrutinizer| |codacy|
+| |travis| |coveralls| |landscape| |scrutinizer| |codacy| |license|
 
 .. |travis| image:: http://img.shields.io/travis/fmarco76/DiscourseSSO/master.png?style=flat
     :alt: Travis-CI Build Status
