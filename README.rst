@@ -24,7 +24,7 @@ Discourse SSO application
     :alt: Codacy Status
     :target: https://www.codacy.com/app/marco-fargetta/DiscourseSSO
 
-.. |license| image:: https://img.shields.io/github/license/fmarco76/DiscourseSSO.svg?style?flat 
+.. |license| image:: https://img.shields.io/github/license/fmarco76/DiscourseSSO.svg?style=flat 
     :alt: License
     :target: http://www.apache.org/licenses/LICENSE-2.0.txt
 
