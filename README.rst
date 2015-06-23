@@ -24,6 +24,11 @@ Discourse SSO application
     :alt: Codacy Status
     :target: https://www.codacy.com/app/marco-fargetta/DiscourseSSO
 
+.. |license| image:: https://img.shields.io/github/license/fmarco76/DiscourseSSO.svg?style?flat 
+    :alt: License
+    :target: http://www.apache.org/licenses/LICENSE-2.0.txt
+
+
 Discourse SSO application implements the SSO protocol requested by `discourse
 forum application <http://www.discourse.org>`_. The real authentication is
 performed by the web server running the application which is responsible of
