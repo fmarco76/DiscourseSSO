@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attributes not provided</title>
+</head>
+<body>
+Your Identity Provider has authenticated your account but the SAML assertion
+does not include the attributes needed by Discourse to let you in.
+
+Please contact your Identity Provider administrator and ask to release the
+following attribute:
+<ul>
+    <li>eduPersonPrincipalName (mandatory)</li>
+    <li>mail (mandatory)</li>
+    <li>sn (optional)</li>
+    <li>givenName (optional)</li>
+</ul>
+</body>
+</html>

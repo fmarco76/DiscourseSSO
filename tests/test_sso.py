@@ -144,3 +144,18 @@ class Test_sso():
                                      '3D%3D%0A&sig=2371c654bbfbc5b322340a'
                                      '8fc61de880147ba00cba0fd6d29a751ad12'
                                      'e87862b')
+
+
+    def test_error_page_403(self):
+        """Test the authentication are properly send to Discourse"""
+        with app.test_request_context('/sso/auth',
+                                      method='GET',
+                                      environ_base={
+                                          'givenName': 'sam',
+                                          'sn': '',
+                                          'username': 'samsam',
+                                          'mail': 'test@test.com',
+                                          'eppn': 'hello123'}
+                                      ):
+            resp = sso.attribuete_not_provided(None)
+            assert resp[1] == 403

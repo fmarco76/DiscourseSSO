@@ -20,7 +20,8 @@ for the most significant values look at the sso/default.py file
 """
 
 
-from flask import abort, Flask, redirect, request, url_for, session
+from flask import abort, Flask, redirect, render_template, request, url_for, \
+    session
 
 import base64
 import hashlib
@@ -117,3 +118,14 @@ def user_authz():
                     '&sig=' + sig)
 
     return redirect(redirect_url)
+
+
+@app.errorhandler(403)
+def attribuete_not_provided(error):
+    """
+    Render a custom error page in case the IdP authenticate the user but does
+    not provide the requested attributes
+
+    :type error: object
+    """
+    return render_template('403.html'), 403
