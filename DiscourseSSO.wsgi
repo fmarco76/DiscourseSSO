@@ -30,4 +30,4 @@ To run in a virtual environment add the activation code. Es.:
 """
 
 
-from sso import app as application
+from discourseSSO.sso import app as application

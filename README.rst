@@ -76,7 +76,7 @@ using saml (for details on mod_shib configuration look at the `official wiki
 When the server is properly configured download/clone the **DiscourseSSO** package
 from `GitHub <https://github.com/fmarco76/DiscourseSSO>`_ in a directory accessible
 by apache. Configure mod_wsgi to include the source code of the package and add
-the `DiscourseSSO.wsgi` script to the location to use for Discourse. Finally, shibboleth
+the ``DiscourseSSO.wsgi`` script to the location to use for Discourse. Finally, shibboleth
 has to protect the authentication directory so the user has to go to the IdP in order
 be accepted. The configuration should look like: ::
 
@@ -100,13 +100,13 @@ be accepted. The configuration should look like: ::
 
 Finally, both Discourse and DiscourseSSO need to be configured. Enable the sso in
 Discourse following the `official documentation <https://meta.discourse.org/t/official-single-sign-on-for-discourse/13045>`_.
-The sso url to is the one going to your DiscourseSSO installation plus `sso/login`, so using
-the above configuration the url is `https://<your-domain>/DisocurseSSO/sso/login`.
+The sso url to is the one going to your DiscourseSSO installation plus ``sso/login``, so using
+the above configuration the url is ``https://<your-domain>/DisocurseSSO/sso/login``.
 
 The sso_secret is a random string and has to be the same in both services. The configuration
-file of DiscourseSSO is `src/config.py` and it require the secret key (`DISCOURSE_SECRET_KEY`),
-the url of Discourse (`DISCOURSE_URL`) and the name of the environment variables
-where mod_shibb will provide the user information(`DISCOURSE_USER_MAP`). This is a
+file of DiscourseSSO is ``src/discoruseSSO/config.py`` and it require the secret key (``DISCOURSE_SECRET_KEY``),
+the url of Discourse (``DISCOURSE_URL``) and the name of the environment variables
+where mod_shib will provide the user information(``DISCOURSE_USER_MAP``). This is a
 map where the key is the attribute provided back to Discourse whereas the values
 are the name of the variables to lookup. The name can be generated combining different
 values but the other accept only one value. Default are good for a SAML based

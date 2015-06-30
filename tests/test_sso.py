@@ -22,7 +22,7 @@ from flask import url_for
 import pytest
 from urlparse import urlparse
 from werkzeug.exceptions import BadRequest, Forbidden
-import sso
+from discourseSSO import sso
 
 app = sso.app
 

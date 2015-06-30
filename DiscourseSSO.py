@@ -17,7 +17,7 @@
 SSO Application tests
 """
 
-import sso
+from discourseSSO import sso
 
 if __name__ == '__main__':
     sso.app.run()

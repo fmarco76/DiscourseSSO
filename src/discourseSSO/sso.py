@@ -29,7 +29,7 @@ import hmac
 import urllib
 
 app = Flask(__name__)
-app.config.from_object('default.Config')
+app.config.from_object('discourseSSO.default.Config')
 app.config.from_pyfile('config.py')
 app.config.from_envvar('DISCOURSE_SSO_CONFIG', True)
 
