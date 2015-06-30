@@ -20,4 +20,6 @@ include DiscourseSSO.wsgi
 
 include DiscourseSSO.py
 
+recursive-include src/templates/ *.html
+
 global-exclude *.py[co] __pycache__ *.so *.pyd
