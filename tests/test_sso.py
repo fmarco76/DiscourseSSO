@@ -147,7 +147,7 @@ class Test_sso():
 
 
     def test_error_page_403(self):
-        """Test the authentication are properly send to Discourse"""
+        """Test the correct error code is propagated"""
         with app.test_request_context('/sso/auth',
                                       method='GET',
                                       environ_base={
