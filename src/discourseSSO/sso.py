@@ -27,6 +27,7 @@ import base64
 import hashlib
 import hmac
 import urllib
+import re
 
 app = Flask(__name__)
 app.config.from_object('discourseSSO.default.Config')
@@ -75,6 +76,7 @@ def user_authz():
     :return: The redirection page to Discourse
     """
     attribute_map = app.config.get('DISCOURSE_USER_MAP')
+    user_flag_filters = app.config.get('DISCOURSE_USER_FLAGS')
     email = request.environ.get(attribute_map['email'])
     external_id = request.environ.get(attribute_map['external_id'])
     if not (email and external_id):
@@ -91,7 +93,8 @@ def user_authz():
                     "_" +
                     hashlib.md5(email).hexdigest()[0:4]
                     )
-
+    avatar_url = request.environ.get(attribute_map['avatar_url'])
+    bio = request.environ.get(attribute_map['bio'])
     app.logger.debug('Authenticating "%s" with username "%s" and email "%s"',
                      name, username, email)
     if 'nonce' not in session:
@@ -100,7 +103,23 @@ def user_authz():
              '&name=' + name +
              '&username=' + username +
              '&email=' + urllib.quote(email) +
-             '&external_id=' + external_id)
+             '&external_id=' + urllib.quote(external_id))
+    if avatar_url:
+        query = query + '&avatar_url=' + urllib.quote(avatar_url)
+    if bio:
+        query = query + '&bio=' + urllib.quote(bio)
+    flags = {}
+    for user_flag in user_flag_filters:
+        if 'filter' in user_flag:
+            filter = user_flag['filter'].split('=')
+            reg_exp = re.compile(filter[1])
+            if (request.environ.get(filter[0]) and
+                    reg_exp.match(request.environ.get(filter[0]))):
+                flags[user_flag['name']] = user_flag['value']
+        else:
+            flags[user_flag['name']] = user_flag['value']
+    for flags_name in sorted(flags.keys()):
+        query = query + '&' + flags_name + '=' + flags[flags_name]
     app.logger.debug('Query string to return: %s', query)
     query_b64 = base64.encodestring(query)
     app.logger.debug('Base64 query string to return: %s', query_b64)

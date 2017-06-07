@@ -28,5 +28,27 @@ DISCOURSE_USER_MAP = {
     'name': ['givenName', 'sn'],
     'username': 'username',
     'external_id': 'eppn',
-    'email': 'mail'
+    'email': 'mail',
+    'avatar_url': 'avatar',
+    'bio': 'profile',
 }
+
+# Flags associated with created accounts. Possible names are:
+# require_activation, admin, moderator and suppress_welcome_message.
+# If the same name is repeated it is applied multiple times in the
+# provided order and last accepted value will be used.
+# The filter is analysed and if it match then the value is added to the
+# user information sent to discourse. The filter format is key=value where
+# the key is an environment attribute and the value is matched using python
+# regular expression. If filter is not provided the flag is always provided
+DISCOURSE_USER_FLAGS = [
+    {
+        'name': 'require_activation',
+        'value': 'false',
+        'filter': 'eppn=^my.name@my.idp$',
+    },
+    {
+        'name': 'admin',
+        'value': 'false',
+    },
+]
