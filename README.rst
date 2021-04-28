@@ -12,10 +12,6 @@ Discourse SSO application
     :alt: Coverage Status
     :target: https://coveralls.io/r/fmarco76/DiscourseSSO
 
-.. |landscape| image:: https://landscape.io/github/fmarco76/DiscourseSSO/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/fmarco76/DiscourseSSO/master
-    :alt: Code Quality Status
-
 .. |scrutinizer| image:: https://img.shields.io/scrutinizer/g/fmarco76/DiscourseSSO/master.png?style=flat
     :alt: Scrutinizer Status
     :target: https://scrutinizer-ci.com/g/fmarco76/DiscourseSSO/
